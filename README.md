@@ -1,5 +1,5 @@
 # gdb.nvim
-Super simple GDB integration with Neovim. This is mainly for C++. Contributions are welcome. 
+Super simple GDB integration with Neovim. This is mainly for C++. Contributions are welcome.
 
 # Todo
 - [ ] Identify project root based on common files (C++ for now).

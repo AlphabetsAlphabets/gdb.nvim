@@ -33,7 +33,6 @@ local function Debug()
 	-- Gets the window created by the call to `vim.cmd("vsplit")`
 	local term_win = vim.api.nvim_get_current_win()
 
-	vim.api.nvim_win_set_height(term_win, 9999999)
 	vim.api.nvim_win_set_width(term_win, 95)
 	vim.api.nvim_win_set_option(term_win, "winfixheight", true)
 	vim.api.nvim_win_set_option(term_win, "winfixwidth", true)
