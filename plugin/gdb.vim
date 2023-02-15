@@ -1,1 +1,1 @@
-let g:GDB_DEFAULT_TO_BUF = true 
+command! Debug lua require("gdb").debug()

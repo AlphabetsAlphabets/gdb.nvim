@@ -4,18 +4,19 @@
 local GDB_DEFAULT_TO_BUF = vim.g.GDB_DEFAULT_TO_BUF
 
 -- `string`. The name of the binary. If set to an empty string or is `nil` prompt for binary name will appear.
-local BINARY_NAME = vim.g.GDB_PROMPT_FOR_BINARY
+local GDB_BINARY_NAME = vim.g.GDB_BINARY_NAME
 
 local function Debug()
 	local file = nil
 	if GDB_DEFAULT_TO_BUF == false then
+		-- Tab completion does not work
 		file = vim.fn.input("Name of source file (defaults to current buffer if empty): ")
 	else
 		file = vim.fn.expand("%:p")
 	end
 
-	local binary = BINARY_NAME
-	if binary == '' then
+	local binary = GDB_BINARY_NAME
+	if binary == '' or binary == nil then
 		binary = vim.fn.input("Name of binary to debug: ")
 	end
 
