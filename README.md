@@ -1,4 +1,6 @@
 # gdb.nvim
+![Demo](https://gfycat.com/slipperyglassinvisiblerail)
+
 Super simple GDB integration with Neovim. This isn't a general debugger, 
 this plugin is specifically for `gdb` and possibly for `rust-gdb` as well.
 
