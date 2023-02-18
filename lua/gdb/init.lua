@@ -35,21 +35,25 @@ M.debug = function()
 	local width = vim.api.nvim_win_get_width(src_win)
 	local height = vim.api.nvim_win_get_height(src_win)
 
-	if width >= 130 then
-		vim.cmd("vsplit")
-	else
+	local MIN_WIDTH = 140
+	if width < MIN_WIDTH then
 		vim.cmd("split")
+	else
+		vim.cmd("vsplit")
 	end
-
 
 	-- `term_win` is the window from splitting the screen
 	local term_win = vim.api.nvim_get_current_win()
-	if width > 120 then
-		vim.api.nvim_win_set_width(term_win, width * 0.35)
+	-- I have no idea why this is reversed
+	if width < MIN_WIDTH then
+		-- Handle vsplit stuff here
+		local size = math.floor(width * 0.20);
+		vim.api.nvim_win_set_height(term_win, size)
 	else
-		vim.api.nvim_win_set_height(term_win, height * 0.35)
+		-- Handle split here
+		local size = math.floor(width * 0.35);
+		vim.api.nvim_win_set_width(term_win, size)
 	end
-
 
 	-- gdb will run inside this buffer
 	local buf_gdb = vim.api.nvim_create_buf(true, true)
