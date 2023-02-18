@@ -36,4 +36,5 @@ This is what I have for now, and I will come up with better rules as time passes
 1. There isn't a solid or concrete instruction for contributing, but feel free to contribute to it :D.
 2. Anything can be discussed. If you feel something is irrelevant or unneeded, feel free to do so.
 
-The general guideline for contributing (at least for now) is to make fork, make your changes, submit a PR.
+The general guideline for contributing (at least for now) is to make fork, make your changes, test changes, submit a PR.
+The development branch is the `dev` branch. The `master` branch is the usable version.
