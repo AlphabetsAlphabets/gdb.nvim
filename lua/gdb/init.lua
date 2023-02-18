@@ -31,23 +31,30 @@ M.debug = function()
 	vim.cmd("tabnew " .. file)
 
 	-- Gets the window where the source file is displayed.
-	-- This is a variable because I want to detect the event where
-	-- `term_win` is closed, and have the whole tab go with it
 	local src_win = vim.api.nvim_get_current_win()
+	local width = vim.api.nvim_win_get_width(src_win)
+	local height = vim.api.nvim_win_get_height(src_win)
 
-	-- Create the buffer where the terminal will run
-	vim.cmd("vsplit")
+	if width >= 130 then
+		vim.cmd("vsplit")
+	else
+		vim.cmd("split")
+	end
 
-	-- Gets the window created by the call to `vim.cmd("vsplit")`
+
+	-- `term_win` is the window from splitting the screen
 	local term_win = vim.api.nvim_get_current_win()
+	if width > 120 then
+		vim.api.nvim_win_set_width(term_win, width * 0.35)
+	else
+		vim.api.nvim_win_set_height(term_win, height * 0.35)
+	end
 
-	vim.api.nvim_win_set_width(term_win, 95)
-	vim.api.nvim_win_set_option(term_win, "winfixheight", true)
-	vim.api.nvim_win_set_option(term_win, "winfixwidth", true)
 
-	-- Creates the buffer that is gonna be in the window
+	-- gdb will run inside this buffer
 	local buf_gdb = vim.api.nvim_create_buf(true, true)
 
+	-- Place a buffer inside a window
 	vim.api.nvim_win_set_buf(term_win, buf_gdb)
 	local start_debugger = {
 		cmd = "term",
