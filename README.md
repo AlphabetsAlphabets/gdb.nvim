@@ -31,7 +31,8 @@ I know what `gdb` was but never understood the value of a debugger. So, I decide
 
 # Contributing
 This being my first try at actually involving a community and not just me or my friends, contributing guidelines are something new to me.
-This is what I have for now, and I will come up with better rules as time passes.
+This is what I have for now, and I will come up with better rules as time passes. If you want to know what features I have planned please
+take a look at `FEATURES.md`
 
 1. There isn't a solid or concrete instruction for contributing, but feel free to contribute to it :D.
 2. Anything can be discussed. If you feel something is irrelevant or unneeded, feel free to do so.
