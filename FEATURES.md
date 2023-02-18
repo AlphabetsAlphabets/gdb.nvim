@@ -1,12 +1,9 @@
 # Features
-Currently there are types of features. Priority and quality of life. Priority is well, priority. And quality of life are features which are nice to have.
-
-## Priority
-- Closing the entire tab created for the debugging session when either the terminal.
-
-## Quality of life
+The higher they are on the list the more important it is they should be finished first.
 - Identify project root based on common files.
-  - Detect the name of the binary
+  - Detect the name of the binary.
+    - Save the name of the binary in a variable per nvim session.
+- Closing the entire tab created for the debugging session when either the terminal.
 
 ## Completed
 - (fb9a91) Tab completion for file names when prompts are enabled. For both specifying source and binary files.
