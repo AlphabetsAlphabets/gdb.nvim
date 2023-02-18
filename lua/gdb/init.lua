@@ -2,18 +2,23 @@
 
 local M = {}
 
--- `boolean`. If `true` then prompt asking for source file will not be asked.
-local GDB_DEFAULT_TO_BUF = vim.g.GDB_DEFAULT_TO_BUF
+local options = {}
 
--- `string`. The name of the binary. If set to an empty string or is `nil` prompt for binary name will appear.
-local GDB_BINARY_NAME = vim.g.GDB_BINARY_NAME
+M.setup = function(opts)
+	-- `boolean`. If `true` then asking for source file will not be asked.
+	opts.default_to_buf = opts.default_to_buf or true
+	-- `boolean`. If `true` then asking for binary file will not be asked.
+	opts.detect_binary = opts.default_to_buf or true
 
-M.debug = function()
+	options = opts
+end
+
+local function create_prompts()
 	local completion = "file"
 	local file = nil
 	local prompt = ""
 
-	if GDB_DEFAULT_TO_BUF == false then
+	if options.default_to_buf == false then
 		-- Tab completion does not work
 		prompt = "Name of source file (defaults to current buffer if empty): "
 		file = vim.fn.input(prompt, '', completion)
@@ -21,11 +26,16 @@ M.debug = function()
 		file = vim.fn.expand("%:p")
 	end
 
-	local binary = GDB_BINARY_NAME
-	if binary == '' or binary == nil then
+	if opts.detect_binary == false then
 		prompt = "Name of binary to debug: "
 		binary = vim.fn.input(prompt, '', completion)
 	end
+
+	return file, binary
+end
+
+local function create_splits()
+	local file, binary = create_prompts()
 
 	-- Creates a new tab with the source file
 	vim.cmd("tabnew " .. file)
@@ -51,7 +61,7 @@ M.debug = function()
 		vim.api.nvim_win_set_height(term_win, size)
 	else
 		-- Handle split here
-		local size = math.floor(width * 0.35);
+		local size = math.floor(height * 0.35);
 		vim.api.nvim_win_set_width(term_win, size)
 	end
 
@@ -69,6 +79,10 @@ M.debug = function()
 	}
 
 	vim.cmd(start_debugger);
+end
+
+M.debug = function()
+	create_splits()
 end
 
 return M
