@@ -2,31 +2,33 @@
 
 local M = {}
 
-local options = {}
-
-M.setup = function(opts)
+M.options = {
 	-- `boolean`. If `true` then asking for source file will not be asked.
-	opts.default_to_buf = opts.default_to_buf or true
-	-- `boolean`. If `true` then asking for binary file will not be asked.
-	opts.detect_binary = opts.default_to_buf or true
+	default_to_buf = true,
 
-	options = opts
+	-- `boolean`. If `true` then asking for binary file will not be asked.
+	detect_binary = true,
+}
+
+-- This function doesn't actually do anything.
+M.setup = function(user_opts)
+	M.options = vim.tbl_extend("keep", user_opts or {}, M.options)
 end
 
 local function create_prompts()
-	local completion = "file"
 	local file = nil
+	local binary = nil
+	local completion = "file"
 	local prompt = ""
 
-	if options.default_to_buf == false then
-		-- Tab completion does not work
+	if M.options.default_to_buf == false then
 		prompt = "Name of source file (defaults to current buffer if empty): "
 		file = vim.fn.input(prompt, '', completion)
 	else
 		file = vim.fn.expand("%:p")
 	end
 
-	if opts.detect_binary == false then
+	if M.options.detect_binary == false then
 		prompt = "Name of binary to debug: "
 		binary = vim.fn.input(prompt, '', completion)
 	end
@@ -61,7 +63,7 @@ local function create_splits()
 		vim.api.nvim_win_set_height(term_win, size)
 	else
 		-- Handle split here
-		local size = math.floor(height * 0.35);
+		local size = math.floor(width * 0.35);
 		vim.api.nvim_win_set_width(term_win, size)
 	end
 
