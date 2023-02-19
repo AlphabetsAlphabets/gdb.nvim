@@ -12,7 +12,9 @@ M.options = {
 
 -- This function doesn't actually do anything.
 M.setup = function(user_opts)
-	M.options = vim.tbl_extend("keep", user_opts or {}, M.options)
+	for k, v in pairs(user_opts) do
+		M.options[k] = v
+	end
 end
 
 local function create_prompts()
