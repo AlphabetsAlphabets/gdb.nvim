@@ -2,12 +2,23 @@
 
 local M = {}
 
+local common_files = {
+	".c",
+	".cpp",
+	".h",
+	".hpp",
+	".gitignore",
+	"CMakeLists.txt"
+}
+
 M.default_options = {
 	-- `boolean`. If `true` then asking for source file will not be asked.
 	default_to_buf = true,
 	-- `boolean`. If `true` then asking for binary file will not be asked.
 	detect_binary = true,
 }
+
+M._binary_name = nil
 
 -- User opts will override default options.
 -- Any value not passed in will retain its default values
@@ -20,10 +31,6 @@ local function prompt(question)
 	return input
 end
 
--- TODO: Implement this
-local function find_project_root()
-end
-
 local function setup_workspace()
 	local file = nil
 	if M.default_options.default_to_buf == false then
@@ -33,11 +40,8 @@ local function setup_workspace()
 	end
 
 	-- Need to find out a way to detect the binary.
-	local binary = ''
-	if M.default_options.detect_binary == false then
-		binary = prompt("Name of binary to debug: ")
-	else
-		-- TODO: Auto find binary
+	if M._binary_name == nil or M.default_options.detect_binary == false then
+		M._binary_name = prompt("Name of binary to debug: ")
 	end
 
 	-- Creates a new tab with the source file
@@ -78,7 +82,7 @@ local function setup_workspace()
 		cmd = "term",
 		args = {
 			"gdb",
-			binary
+			M._binary_name
 		},
 	}
 

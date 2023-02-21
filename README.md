@@ -29,6 +29,18 @@ local opts = {
 gdb.setup(opts)
 ```
 
+These aren't the defaults. 
+
+## Suggested keybindings
+```lua
+vim.keymap.set("t", "<C-\>l", "<C-\><C-n><C-w>l", {})
+vim.keymap.set("t", "<C-\>h", "<C-\><C-n><C-w>h", {})
+vim.keymap.set("t", "<C-\>j", "<C-\><C-n><C-w>j", {})
+vim.keymap.set("t", "<C-\>k", "<C-\><C-n><C-w>k", {})
+```
+
+`t` stands for terminal mode. The buffer where the `gdb` process is ran is in this mode.
+
 # Motivation
 I've been progamming for about two years now and I've never actually used a debugger before, I used it for the first time for school work.
 Ever since I've been desperately looking to get a debugging experience working for Neovim once I understood how important it was. There are two plugins for this.
