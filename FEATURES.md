@@ -1,5 +1,6 @@
 # Features
 The higher they are on the list the more important it is they should be finished first.
+- Create a way to change behavior via setup function
 - Identify project root based on common files.
   - Detect the name of the binary.
     - Save the name of the binary in a variable per nvim session.
