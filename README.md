@@ -39,7 +39,7 @@ I couldn't setup DAP and the Vimpsector workflow just wasn't for me. One of them
 of the first whenever I stepped forward or into really bugged me. Another thing is that Vimpsector is made mainly for
 Vim, not Neovim.
 
-I know what `gdb` was but never understood the value of a debugger. So, I decided to make this to integrate the usage of gdb into Neovim.
+I know what `gdb` was but never understood the value of a debugger. So, I decided to make this to integrate the usage of gdb into Neovim. I understand that this is plugin geared towards C/C++ (rust with `rust-gdb`?) not debugging in general.
 
 # Contributing
 This being my first try at actually involving a community and not just me or my friends, contributing guidelines are something new to me.
