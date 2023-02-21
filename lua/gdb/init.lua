@@ -15,7 +15,7 @@ M.default_options = {
 	-- `boolean`. If `true` then asking for source file will not be asked.
 	default_to_buf = true,
 	-- `boolean`. If `true` then asking for binary file will not be asked.
-	detect_binary = true,
+	ask_binary = true,
 }
 
 M._binary_name = nil
@@ -40,7 +40,7 @@ local function setup_workspace()
 	end
 
 	-- Need to find out a way to detect the binary.
-	if M._binary_name == nil or M.default_options.detect_binary == false then
+	if M._binary_name == nil or M.default_options.ask_binary == false then
 		M._binary_name = prompt("Name of binary to debug: ")
 	end
 
