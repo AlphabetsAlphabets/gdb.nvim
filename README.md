@@ -11,11 +11,23 @@ You can use whichever package manager you prefer. In `packer.nvim` you can choos
 
 # Configuration
 There are currently two vairables gdb.nvim works with.
-1. `GDB_DEFAULT_TO_BUF`. `boolean`, if `true` then prompt asking for source file will not be asked.
-2. `GDB_BINARY_NAME`. `string`, the name of the binary. If set to an empty string or is `nil` prompt for binary name will appear.
+1. `default_to_buf`. `boolean`, if `true` then prompt asking for source file will not be asked. Defaults to `true`.
+2. `detect_name`. `boolean`. If `true` then asking for binary file will not be asked. Defaults to `true`.
 
 # Usage
-The command `:Debug` has been exposed. Since keymaps are personal I decided not to give it a mapping. I prefer just calling the command itself.
+The command `:Debug` has been exposed. Since keymaps are personal I decided not to give it a mapping.
+
+## Configuration
+```lua
+local gdb = require("gdb")
+
+local opts = {
+	default_to_buf = true,
+	detect_binary = false,
+}
+
+gdb.setup(opts)
+```
 
 # Motivation
 I've been progamming for about two years now and I've never actually used a debugger before, I used it for the first time for school work.
