@@ -6,7 +6,7 @@ Features that I'm not sure if it should be implemented or not.
 - Returning the user's cursor to the original location where `:Debug` was called.
 
 ## Completed
-- ([8a68e1c](https://github.com/AlphabetsAlphabets/gdb.nvim/commit/8a68e1c7afb15a37b060cc8143f25466162c6f38)) Closing the entire tab created for the debugging session when either the terminal.
+- ([46a6a70](https://github.com/AlphabetsAlphabets/gdb.nvim/commit/46a6a70c09006d79c2a1063e1a90586efa179345)) Closing the entire tab created for the debugging session when either the terminal.
 - ([5226dbd](https://github.com/AlphabetsAlphabets/gdb.nvim/commit/5226dbd33f637fee7f76a6f836564b9e5c6f4fcf)) Create a way to change behavior via setup function
 - ([fb9a91f](https://github.com/AlphabetsAlphabets/gdb.nvim/commit/fb9a91f6c3def3cccfd03f118989520cea792032)) Tab completion for file names when prompts are enabled. For both specifying source and binary files.
 - ([50724b6](https://github.com/AlphabetsAlphabets/gdb.nvim/commit/50724b6ca0efd32695d6662fa22ea2e9f57c7e0f)) Save the name of the binary in a variable per nvim session
