@@ -25,7 +25,7 @@ end
 
 local function subscribe_to_buf_close_event(term_buf, src_buf)
 	local events = {
-		"BufUnload",
+		-- "BufUnload",
 		"BufDelete"
 	}
 
@@ -38,16 +38,11 @@ local function subscribe_to_buf_close_event(term_buf, src_buf)
 			-- in the new tab
 			local same_buf = cur_buf == term_buf or cur_buf == src_buf
 
-			-- Without this nvim will try to close the window multiple times.
-			-- If there are only two windows after the debugging tab is closed
-			-- nvim will also try to close the last window which results in
-			-- an arrow while leaving the last window unclosed. This does the same thing
-			-- but without the error. So, the right way :D
-			local list_of_windows = #vim.api.nvim_list_wins()
-			local has_one_win = list_of_windows == 1
-
-			if same_buf and has_one_win == false then
-				vim.api.nvim_win_close(cur_win, false)
+			if same_buf then
+				-- If `cur_win` is passed in this also includes the window where
+				-- `:Debug` was called. So, both windows get closed. Setting it
+				-- to `0` will close only the current buffer.
+				vim.api.nvim_win_close(0, false)
 			end
 		end
 	})
