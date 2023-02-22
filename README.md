@@ -4,6 +4,9 @@
 Super simple GDB integration with Neovim. This isn't a general debugger, 
 this plugin is specifically for `gdb` and possibly for `rust-gdb` as well.
 
+> I noticed roughly one week into development that this is pretty much just a Lua
+> implementation of `Termdebug`. So, if you'd like a lua option then here you go :D
+
 # Installation
 You can use whichever package manager you prefer. In `packer.nvim` you can choose either option listed
 1. `use 'AlphabetsAlphabets/gdb.nvim'`
@@ -29,7 +32,7 @@ local opts = {
 gdb.setup(opts)
 ```
 
-These aren't the defaults. 
+The values set here are *not* the defaults. You can use this method or any other equivalent method.
 
 ## Suggested keybindings
 ```lua
