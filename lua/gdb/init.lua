@@ -9,12 +9,7 @@ M.default_options = {
 
 M._binary_name = nil
 
--- Returning the user's cursor to the original location where `:Debug` was called.
--- Still under consideration
-M._call_origin = {
-	win_id = 0,
-	pos = { 0, 0 }
-}
+M._gdb_mark = "Z"
 
 -- User opts will override default options.
 -- Any value not passed in will retain its default values
@@ -23,7 +18,7 @@ M.setup = function(user_opts)
 end
 
 
-local function subscribe_to_buf_close_event(term_buf, src_buf)
+local function subscribe_to_buf_close_event(origin_buf, term_buf, src_buf)
 	local events = {
 		"BufUnload",
 		"BufDelete"
@@ -43,6 +38,22 @@ local function subscribe_to_buf_close_event(term_buf, src_buf)
 				-- `:Debug` was called. So, both windows get closed. Setting it
 				-- to `0` will close only the current buffer.
 				vim.api.nvim_win_close(0, false)
+
+				local pos = vim.api.nvim_buf_get_mark(origin_buf, M._gdb_mark)
+				local line = pos[1]
+				local col = pos[2]
+				-- print(vim.inspect(pos))
+				-- sets mark if it doesn't exist
+				if line ~= 0 and col ~= 0 then
+					vim.api.nvim_buf_set_mark(origin_buf, M._gdb_mark, line, col, {})
+				else
+					vim.api.nvim_buf_call(origin_buf, function()
+						vim.cmd("normal! `" .. M._gdb_mark)
+					end)
+
+					vim.api.nvim_buf_del_mark(origin_buf, M._gdb_mark)
+				end
+
 			end
 		end
 	})
@@ -54,6 +65,10 @@ local function prompt(question)
 end
 
 local function setup_workspace()
+	local origin_buf = vim.api.nvim_get_current_buf()
+	local pos = vim.api.nvim_win_get_cursor(0)
+	vim.api.nvim_buf_set_mark(origin_buf, M._gdb_mark, pos[1], pos[2], {})
+
 	local cur_win = vim.api.nvim_get_current_win()
 	local pos = vim.api.nvim_win_get_cursor(0)
 	M._call_origin = {
@@ -116,7 +131,7 @@ local function setup_workspace()
 	}
 
 	local buf_src = vim.api.nvim_win_get_buf(src_win)
-	subscribe_to_buf_close_event(buf_gdb, buf_src)
+	subscribe_to_buf_close_event(origin_buf, buf_gdb, buf_src)
 
 	vim.cmd(start_debugger);
 end
