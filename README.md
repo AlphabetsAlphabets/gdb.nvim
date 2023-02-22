@@ -35,14 +35,16 @@ gdb.setup(opts)
 The values set here are *not* the defaults. You can use this method or any other equivalent method.
 
 ## Suggested keybindings
+These keybindings are for navigating when you're in terminal mode. The buffer with `gdb` active is
+in terminal mode and all keybindings will not work when in this mode. To return to normal mode
+you need to input `<C-\><C-n>`. These are just the suggested keybindings.
+
 ```lua
 vim.keymap.set("t", "<C-\>l", "<C-\><C-n><C-w>l", {})
 vim.keymap.set("t", "<C-\>h", "<C-\><C-n><C-w>h", {})
 vim.keymap.set("t", "<C-\>j", "<C-\><C-n><C-w>j", {})
 vim.keymap.set("t", "<C-\>k", "<C-\><C-n><C-w>k", {})
 ```
-
-`t` stands for terminal mode. The buffer where the `gdb` process is ran is in this mode.
 
 # Motivation
 I've been progamming for about two years now and I've never actually used a debugger before, I used it for the first time for school work.

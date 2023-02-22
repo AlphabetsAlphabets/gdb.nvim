@@ -1,9 +1,9 @@
 # Features
 The higher they are on the list the more important it is they should be finished first.
+- Returning the user's cursor to the original location where `:Debug` was called.
 
 ## Unsure
 Features that I'm not sure if it should be implemented or not.
-- Returning the user's cursor to the original location where `:Debug` was called.
 
 ## Completed
 - ([46a6a70](https://github.com/AlphabetsAlphabets/gdb.nvim/commit/46a6a70c09006d79c2a1063e1a90586efa179345)) Closing the entire tab created for the debugging session when either the terminal.
