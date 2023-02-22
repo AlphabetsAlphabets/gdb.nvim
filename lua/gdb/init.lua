@@ -25,7 +25,7 @@ end
 
 local function subscribe_to_buf_close_event(term_buf, src_buf)
 	local events = {
-		-- "BufUnload",
+		"BufUnload",
 		"BufDelete"
 	}
 
